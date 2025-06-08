@@ -1,6 +1,6 @@
 # Cargo.toml
 [package]
-name = "tun_rs_mac_addr_test"
+name = "tap_mac_addr_test"
 version = "0.1.0"
 edition = "2021"
 

@@ -990,6 +990,19 @@ dependencies = [
 ]
 
 [[package]]
+name = "tap_mac_addr_test"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "clap",
+ "env_logger",
+ "log",
+ "rand",
+ "tokio",
+ "tun-rs",
+]
+
+[[package]]
 name = "thiserror"
 version = "1.0.69"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1063,19 +1076,6 @@ dependencies = [
  "widestring",
  "windows-sys 0.59.0",
  "winreg",
-]
-
-[[package]]
-name = "tun_rs_mac_addr_test"
-version = "0.1.0"
-dependencies = [
- "anyhow",
- "clap",
- "env_logger",
- "log",
- "rand",
- "tokio",
- "tun-rs",
 ]
 
 [[package]]
