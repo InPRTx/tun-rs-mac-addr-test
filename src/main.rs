@@ -1,7 +1,7 @@
 use anyhow::{Context, Result};
 use clap::Parser;
 use log::{info, warn};
-// 引入正确的库和类型
+use std::process::Command;
 use tun_rs::{AsyncDevice, DeviceBuilder, Layer};
 
 const DEFAULT_TAP_NAME: &str = "tap0";
@@ -48,6 +48,28 @@ struct Cli {
     #[arg(long, value_parser = parse_mac_address)]
     mac: Option<[u8; 6]>,
 }
+fn show_device_info(dev_name: &str) -> Result<()> {
+    info!("--- 执行 `ip addr show dev {}` ---", dev_name);
+    let output = Command::new("ip")
+        .arg("addr")
+        .arg("show")
+        .arg("dev")
+        .arg(dev_name)
+        .output()
+        .with_context(|| format!("执行 'ip addr show dev {}' 命令失败", dev_name))?;
+
+    if output.status.success() {
+        let stdout = String::from_utf8_lossy(&output.stdout);
+        // 直接打印捕获到的标准输出，保留原始格式
+        print!("{}", stdout);
+    } else {
+        let stderr = String::from_utf8_lossy(&output.stderr);
+        // 使用 warn! 打印错误信息，因为设备可能创建成功但命令执行失败
+        warn!("获取设备 '{}' 信息失败:\n{}", dev_name, stderr.trim());
+    }
+    info!("-------------------------------------");
+    Ok(())
+}
 
 #[tokio::main]
 async fn main() -> Result<()> {
@@ -93,6 +115,9 @@ async fn main() -> Result<()> {
 
     let device = builder.build_async().context("创建TAP设备失败")?;
     info!("TAP设备 '{}' 创建成功!", device.name()?);
+
+    show_device_info(&device.name()?)?;
+
     info!("设备已启动，按 Ctrl+C 退出。");
 
     // 等待终止信号 (Ctrl+C)
