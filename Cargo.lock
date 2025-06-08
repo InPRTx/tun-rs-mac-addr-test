@@ -1054,8 +1054,7 @@ dependencies = [
 [[package]]
 name = "tun-rs"
 version = "2.2.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "94f70137b1b160307290f51009564886c3683cc335d02db59c21206425fe1709"
+source = "git+https://github.com/tun-rs/tun-rs#ee3191c748facdaaadfb0270e4213033007a98f6"
 dependencies = [
  "bindgen",
  "blocking",

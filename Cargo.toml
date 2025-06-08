@@ -6,7 +6,7 @@ edition = "2021"
 
 [dependencies]
 tokio = { version = "1", features = ["full"] }
-tun-rs = { version = "2.2.0", features = ["async"] }
+tun-rs = { git = "https://github.com/tun-rs/tun-rs", features = ["async"] }
 anyhow = "1.0"
 clap = { version = "4.4", features = ["derive"] }
 rand = "0.8"
