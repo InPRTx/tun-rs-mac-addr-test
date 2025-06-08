@@ -1,0 +1,14 @@
+# Cargo.toml
+[package]
+name = "tun_rs_mac_addr_test"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+tokio = { version = "1", features = ["full"] }
+tun-rs = { version = "2.2.0", features = ["async"] }
+anyhow = "1.0"
+clap = { version = "4.4", features = ["derive"] }
+rand = "0.8"
+env_logger = "0.11"
+log = "0.4"
